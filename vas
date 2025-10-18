@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>イメージの苦痛度・鮮明度と感情の強さ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: "Hiragino Sans","Yu Gothic",sans-serif; max-width: 760px; margin: 32px auto; padding: 0 16px; }
+  h1 { text-align: center; margin-bottom: 12px; }
+  .desc { text-align: center; color: #444; margin-bottom: 28px; line-height: 1.6; }
+  section { margin: 22px 0 28px; border-top: 1px solid #eee; padding-top: 18px; }
+  h3 { margin: 0 0 8px; }
+  .label-box { display: flex; justify-content: space-between; font-size: .9em; color: #555; }
+  input[type=range] { width: 100%; margin: 10px 0 4px; }
+  .val { font-weight: 700; }
+  .btnbox { text-align: center; margin-top: 24px; }
+  button { background: #2563eb; color: #fff; border: 0; padding: 12px 28px; border-radius: 10px; cursor: pointer; font-size: 1rem; }
+  button:hover { opacity: .95; }
+  .foot { text-align: center; color: #666; font-size: .85em; margin-top: 18px; }
+  /* Thanks view (HIDDEN by default) */
+  #thanks { display: none; min-height: 60vh; align-items:center; justify-content:center; }
+  .card { max-width: 640px; padding: 28px; text-align: center; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.06); margin: 48px auto; }
+  .small{ color:#666; font-size:.95em; margin-top:10px; }
+</style>
+</head>
+<body>
+  <main id="formview">
+    <h1>イメージの苦痛度・鮮明度と感情の強さ</h1>
+    <p class="desc">
+      看護師として働いている中で起こった嫌な出来事を思い出してください。<br>
+      今、その出来事を思い出したときに感じるそれぞれの強さを、0〜100のスライダーで選んでください。
+    </p>
+
+    <!-- 名前入力 -->
+    <section>
+      <h3>お名前</h3>
+      <input type="text" id="name" placeholder="氏名を入力してください" style="width:100%;padding:8px;font-size:1em;border:1px solid #ccc;border-radius:6px;">
+    </section>
+
+    <section><h3>苦痛度</h3><input type="range" id="pain" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：まったく苦痛はない</span><span>100：耐えられないほど苦痛が強い</span></div><div>現在の値：<span id="pain_val" class="val">50</span></div></section>
+    <section><h3>イメージの鮮明度</h3><input type="range" id="clarity" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：まったく鮮明でない</span><span>100：非常に鮮明</span></div><div>現在の値：<span id="clarity_val" class="val">50</span></div></section>
+    <section><h3>不安</h3><input type="range" id="anxiety" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="anxiety_val" class="val">50</span></div></section>
+    <section><h3>怒り</h3><input type="range" id="anger" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="anger_val" class="val">50</span></div></section>
+    <section><h3>悲しみ</h3><input type="range" id="sadness" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="sadness_val" class="val">50</span></div></section>
+    <section><h3>恥ずかしい</h3><input type="range" id="shame" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="shame_val" class="val">50</span></div></section>
+    <section><h3>罪悪感</h3><input type="range" id="guilt" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="guilt_val" class="val">50</span></div></section>
+    <section><h3>無力感</h3><input type="range" id="helpless" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="helpless_val" class="val">50</span></div></section>
+    <section><h3>喜び</h3><input type="range" id="joy" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="joy_val" class="val">50</span></div></section>
+    <section><h3>満足</h3><input type="range" id="satisfaction" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="satisfaction_val" class="val">50</span></div></section>
+    <section><h3>誇り</h3><input type="range" id="pride" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="pride_val" class="val">50</span></div></section>
+
+    <div class="btnbox"><button onclick="sendData()">送信</button></div>
+    <div class="foot">送信するとGoogleフォームに記録されます。</div>
+  </main>
+
+  <section id="thanks">
+    <div class="card">
+      <h2>ご協力ありがとうございました</h2>
+      <p>回答は正常に記録されました。ブラウザを閉じてください。</p>
+    </div>
+  </section>
+
+<script>
+  const entry = {
+    name:"entry.1304032046",
+    pain:"entry.1563073644",
+    clarity:"entry.641485691",
+    anxiety:"entry.1142955487",
+    anger:"entry.1700977159",
+    sadness:"entry.320340832",
+    shame:"entry.793952582",
+    guilt:"entry.2114020919",
+    helpless:"entry.289721035",
+    joy:"entry.235259913",
+    satisfaction:"entry.1766661554",
+    pride:"entry.1665734958"
+  };
+  const sliders=["pain","clarity","anxiety","anger","sadness","shame","guilt","helpless","joy","satisfaction","pride"];
+  sliders.forEach(id=>{
+    const s=document.getElementById(id),v=document.getElementById(id+"_val");
+    s.addEventListener("input",()=>v.textContent=s.value);
+  });
+
+  function sendData(){
+    const name=document.getElementById("name").value.trim();
+    if(!name){alert("お名前を入力してください。");return;}
+    const params=new URLSearchParams();
+    params.append(entry.name,name);
+    sliders.forEach(k=>params.append(entry[k],document.getElementById(k).value));
+    const formURL="https://docs.google.com/forms/d/e/1FAIpQLScz9BQacjLUhsFeJYpj2Fz8XEwM_1W5z3pYkm0CR2unEe80jg/formResponse";
+
+    // 送信。完了後、フォームを隠して Thanks を表示（inline）。
+    fetch(formURL,{method:"POST",mode:"no-cors",body:params})
+      .catch(()=>{})
+      .finally(()=>{
+        document.getElementById("formview").style.display="none";
+        const t = document.getElementById("thanks");
+        t.style.display="flex";
+        window.scrollTo({top:0, behavior:"smooth"});
+      });
+  }
+</script>
+</body>
+</html>
