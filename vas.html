@@ -40,6 +40,7 @@
 
     <section><h3>苦痛度</h3><input type="range" id="pain" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：まったく苦痛はない</span><span>100：耐えられないほど苦痛が強い</span></div><div>現在の値：<span id="pain_val" class="val">50</span></div></section>
     <section><h3>イメージの鮮明度</h3><input type="range" id="clarity" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：まったく鮮明でない</span><span>100：非常に鮮明</span></div><div>現在の値：<span id="clarity_val" class="val">50</span></div></section>
+    <section><h3>恐怖</h3><input type="range" id="fear" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="fear_val" class="val">50</span></div></section>
     <section><h3>不安</h3><input type="range" id="anxiety" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="anxiety_val" class="val">50</span></div></section>
     <section><h3>怒り</h3><input type="range" id="anger" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="anger_val" class="val">50</span></div></section>
     <section><h3>悲しみ</h3><input type="range" id="sadness" min="0" max="100" value="50" step="1"><div class="label-box"><span>0：感じない</span><span>100：非常に強い</span></div><div>現在の値：<span id="sadness_val" class="val">50</span></div></section>
@@ -66,6 +67,7 @@
     name:"entry.1304032046",
     pain:"entry.1563073644",
     clarity:"entry.641485691",
+    fear:"entry.791167674", 
     anxiety:"entry.1142955487",
     anger:"entry.1700977159",
     sadness:"entry.320340832",
@@ -76,7 +78,7 @@
     satisfaction:"entry.1766661554",
     pride:"entry.1665734958"
   };
-  const sliders=["pain","clarity","anxiety","anger","sadness","shame","guilt","helpless","joy","satisfaction","pride"];
+  const sliders=["pain","clarity","fear","anxiety","anger","sadness","shame","guilt","helpless","joy","satisfaction","pride"];
   sliders.forEach(id=>{
     const s=document.getElementById(id),v=document.getElementById(id+"_val");
     s.addEventListener("input",()=>v.textContent=s.value);
